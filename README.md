@@ -1,16 +1,15 @@
-# Harbor V6 — Conversation Preview
+# Harbor V7 — Voice & Conversation Preview
 
-**Free static demo, not an AI or crisis response service.**
+Static scripted demonstration for adults 18+. Not AI, therapy, monitoring, risk assessment, or emergency response.
 
-## New in V6
-- Scripted chat-bubble journeys for overwhelmed, lonely, encouragement, and optional faith choices.
-- Continue, Back, Other options, trusted people, and human-support navigation.
-- Optional device text-to-speech read-aloud (browser support varies), with Stop voice. No microphone recording.
-- Improved mobile spacing and touch controls.
-- V5 and V4 features remain available.
+## New in V7
+- Voice settings tab: choose from browser-provided English voices, adjust pace, preview voice, stop speaking. Availability and quality vary, especially on iPhone Safari.
+- Voice preferences saved on-device in localStorage, separately from the opt-in plan/check-in storage. Erase all local data removes both.
+- A few warmer keyword-triggered **prewritten** sample replies. They do not understand user messages, detect crises, or provide personalized advice.
+- Preserves existing check-ins, trusted contacts, support plan, optional faith content, and 988/911 links.
 
-## Deploy
-Unzip and upload the seven website files from this folder to the **root** of your existing GitHub repository `cpotts29707/harbor-founding-preview`, replacing the previous versions. Do not upload the enclosing folder. Commit to `main`. GitHub Pages will redeploy automatically. Refresh on desktop with Ctrl+Shift+R; close and reopen the iPhone home-screen app if needed.
+## Publish to GitHub Pages
+Unzip this archive. Open the inner `harbor-founding-preview-main` folder, and upload **all seven files** directly to the root of your existing GitHub repository `cpotts29707/harbor-founding-preview` (not the enclosing folder). Commit changes to `main`. Allow GitHub Pages to deploy, then refresh the iPhone app.
 
 ## Safety and privacy
-No AI, monitoring, emergency dispatch, clinician support, or automated alerts. No crisis detection. Do not enter sensitive information. Device read-aloud speaks fixed scripted prompts only. Local saving for plan/check-ins/contacts is optional and off by default; when enabled it uses unencrypted browser localStorage. Downloaded plans are unencrypted text. Crisis resources are linked directly; the user initiates contact. Test thoroughly before sharing widely.
+This prototype is not ready to serve as a mental health intervention. No clinical assessment, automatic alerts, or monitoring. Avoid entering sensitive details. Optional plan/check-in/contact storage is unencrypted localStorage; voice preferences are localStorage as well. Website hosting may log requests. Browser speech synthesis does not use Harbor's microphone; browser/device implementations vary.
