@@ -5,8 +5,8 @@ const KEY='harbor-v4-device-preview';
 const VOICE_KEY='harbor-v7-voice-preferences';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fresh=()=>({checkins:[],contacts:[],plan:{person:'',ground:'',safePlace:'',nextStep:''}});
-let data=fresh(),storageEnabled=false,tab='welcome',chat=[],guideTopic='overwhelmed',guideStep=0,voiceOn=false,voicePrefs={voice:'',rate:0.88,profile:'Cedar'},availableVoices=[];
-try{const v=JSON.parse(localStorage.getItem(VOICE_KEY)||'null');if(v){voicePrefs={voice:String(v.voice||''),rate:Math.min(1.2,Math.max(0.7,Number(v.rate)||0.88)),profile:['Cedar','Marin','Onyx','Coral','Sage','Ash'].includes(v.profile)?v.profile:'Cedar'}}}catch{}
+let data=fresh(),storageEnabled=false,tab='welcome',chat=[],guideTopic='overwhelmed',guideStep=0,voiceOn=false,voicePrefs={voice:'',rate:0.88,profile:'Marin'},availableVoices=[];
+try{const v=JSON.parse(localStorage.getItem(VOICE_KEY)||'null');if(v){voicePrefs={voice:String(v.voice||''),rate:Math.min(1.2,Math.max(0.7,Number(v.rate)||0.88)),profile:['Cedar','Marin','Onyx','Coral','Sage','Ash'].includes(v.profile)?v.profile:'Marin'}}}catch{}
 function loadVoices(){if(!('speechSynthesis' in window))return;availableVoices=window.speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith('en'));if(tab==='voice')show('voice')}
 if('speechSynthesis' in window){window.speechSynthesis.addEventListener?.('voiceschanged',loadVoices);loadVoices()}
 function voiceOptions(){return availableVoices.map(v=>`<option value="${esc(v.voiceURI)}" ${voicePrefs.voice===v.voiceURI?'selected':''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}
@@ -15,7 +15,7 @@ function saveVoicePrefs(){try{localStorage.setItem(VOICE_KEY,JSON.stringify(voic
 function voiceScreen(){return intro('HARBOR V8 · VOICE STUDIO','Choose the voice that feels right','Explore six founding OpenAI voice profiles. Premium audio is not connected in this preview; selecting a profile will not change your device’s built-in voice.')+
 '<div class="guide-alert"><strong>Voice Studio preview only.</strong> Cedar, Marin, Onyx, Coral, Sage and Ash are profile selections, not playable OpenAI voice samples here. For authentic samples, visit <a href="https://www.openai.fm/" target="_blank" rel="noopener">OpenAI.fm</a>. Do not enter personal or sensitive information in external demos.</div>'+
 '<div class="choice-grid" role="group" aria-label="Founding voice profiles">'+FOUNDING_VOICES.map(([name,role])=>'<button type="button" class="choice-card" data-harbor-voice="'+name+'" aria-pressed="'+(voicePrefs.profile===name)+'"><strong>'+name+(voicePrefs.profile===name?' ✓':'')+'</strong>'+role+'</button>').join('')+'</div>'+
-'<p class="status">Selected profile: <strong>'+esc(voicePrefs.profile||'Cedar')+'</strong>. Your preference stays in this browser; premium audio is not active.</p>'+
+'<p class="status">Selected profile: <strong>'+esc(voicePrefs.profile||'Marin')+'</strong>. Your preference stays in this browser; premium audio is not active.</p>'+
 '<div class="item"><h3>Optional device read-aloud</h3><p class="subtle">The button below plays your phone or computer’s built-in synthetic voice, NOT the selected OpenAI voice.</p><label for="voiceSelect">Device voice</label><select class="input" id="voiceSelect"><option value="">Device default</option>'+voiceOptions()+'</select><label for="voiceRate">Speaking pace: <output id="rateValue">'+voicePrefs.rate.toFixed(2)+'×</output></label><input id="voiceRate" type="range" min="0.70" max="1.20" step="0.05" value="'+voicePrefs.rate+'" style="width:100%;min-height:44px"><div class="rowactions"><button class="btn" id="previewVoice" '+(!('speechSynthesis' in window)?'disabled':'')+'>▶ Test device voice</button><button class="tinybtn" id="stopVoice">Stop audio</button></div></div>'+
 '<p class="subtle">No microphone access is requested. This demo does not send conversation text to a speech provider. Voice settings are stored locally and removed by Erase all local data.</p>'}
 
@@ -82,6 +82,6 @@ if(b.id==='clearCheckins'){if(confirm('Clear all check-ins?')){data.checkins=[];
 if(b.id==='clearChat'){chat=[];show('talk')}
 if(b.id==='exportPlan')exportPlan();
 if(b.id==='toggleStorage'){if(storageEnabled){if(confirm('Turn off saving and delete the stored copy?')){storageEnabled=false;try{localStorage.removeItem(KEY)}catch{};show('privacy')}}else{storageEnabled=true;save();show('privacy')}}
-if(b.id==='eraseAll'){if(confirm('Erase all Harbor preview information on this device?')){stopSpeech();data=fresh();chat=[];storageEnabled=false;voicePrefs={voice:'',rate:0.88,profile:'Cedar'};try{localStorage.removeItem(KEY);localStorage.removeItem(VOICE_KEY)}catch{};show('privacy')}}
+if(b.id==='eraseAll'){if(confirm('Erase all Harbor preview information on this device?')){stopSpeech();data=fresh();chat=[];storageEnabled=false;voicePrefs={voice:'',rate:0.88,profile:'Marin'};try{localStorage.removeItem(KEY);localStorage.removeItem(VOICE_KEY)}catch{};show('privacy')}}
 });
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
